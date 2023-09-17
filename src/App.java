@@ -46,7 +46,7 @@ public class App {
 
     public void generateDisciplines(){
         Discipline discipline = new Discipline();
-        write("Seja bem vindo à Escola do Bilau!");
+        write("Seja bem vindo à Escola da Brendinha!");
         write("Quantas matérias você possui na sua escola?");
         int num = read.nextInt();
 
