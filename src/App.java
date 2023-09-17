@@ -10,21 +10,26 @@ public class App {
 
     generateTeacher();
 
+
+
 }//constr
 
     public void generateTeacher(){
          boolean rep = true;
 
         Front front = new Front();
+
+        int i = 1;
+
         while(rep){
-            int i = 1;
-           int option = front.teacherMenu();
+
+            int option = front.teacherMenu();
 
            switch (option){
                case 1:
                    write("Digite o nome");
-                   professor.put(i++,read.next());
-
+                   professor.put((int)(Math.random()*9000)+1000,read.next());
+                   teacher.setTeacher(professor);
                    break;
 
                case 2:
@@ -36,16 +41,24 @@ public class App {
                case 3:
                    listTeachers();
                    break;
+               case 0:
+                   rep = false;
+                   break;
            }//sc
 
         }//while
-        teacher.setTeacher(professor);
 
-}//genTe
+
+}//genTeacher
 
     public void listTeachers(){
 
+        for(Map.Entry<Integer, String> entry : professor.entrySet()){
+            int id = entry.getKey();
+            String name = entry.getValue();
 
+            write("Nome: " + name + "    ID: "+ id);
+        }//for
 
       }
 
