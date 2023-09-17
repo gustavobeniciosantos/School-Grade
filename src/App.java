@@ -1,7 +1,8 @@
 import java.util.*;
 public class App {
     Scanner read = new Scanner(System.in);
-    HashMap<Integer, String> teachers = new HashMap<>();
+    Teacher teacher = new Teacher();
+    HashMap<Integer, String> professor = new HashMap<>();
     public App(){
 
     generateDisciplines();
@@ -22,24 +23,29 @@ public class App {
            switch (option){
                case 1:
                    write("Digite o nome");
-                   teachers.put(i,read.next());
-                   i++;
-                   break;
-               case 2:
+                   professor.put(i++,read.next());
 
+                   break;
+
+               case 2:
+                   listTeachers();
+                   write("Digite o ID do professor que deseja remover: ");
+                   int key = read.nextInt();
+                    professor.remove(key);
                    break;
                case 3:
                    listTeachers();
                    break;
            }//sc
+
         }//while
+        teacher.setTeacher(professor);
+
 }//genTe
 
     public void listTeachers(){
-        for(int i = 0; i<teachers.size()+1;i++){
-           String name = teachers.get(1);
-           write("Nome: " + name+"     ID:"+i);
-        }
+
+
 
       }
 

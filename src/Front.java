@@ -17,7 +17,7 @@ public class Front {
         write("1. Adicionar professor");
         write("2. Remover professor (Digite o id dele)");
         write("3. Listar professores");
-        write("0. Sair");
+        write("0. Finalizar");
 
         return read.nextInt();
     }
