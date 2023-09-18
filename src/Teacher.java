@@ -2,27 +2,25 @@ import java.util.HashMap;
 
 public class Teacher{
 
-    private HashMap<Integer, String> teacher;
-    private HashMap<Integer, String> disciplines;
+    private String name;
+    private String id;
     private String salary;
 
-    public HashMap<Integer, String> getTeacher() {
-        return teacher;
+    public String getName() {
+        return name;
     }
 
-    public void setTeacher(HashMap<Integer, String> teacher) {
-        this.teacher = teacher;
+    public void setName(String name) {
+        this.name = name;
     }
 
-
-    public HashMap<Integer, String> getDisciplines() {
-        return disciplines;
+    public String getId() {
+        return id;
     }
 
-    public void setDisciplines(HashMap<Integer, String> disciplines) {
-        this.disciplines = disciplines;
+    public void setId(String id) {
+        this.id = id;
     }
-
 
     public String getSalary() {
         return salary;
