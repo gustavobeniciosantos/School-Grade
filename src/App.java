@@ -22,6 +22,9 @@ public class App {
                 case 2:
                     assignDisciplineToTeacher();
                     break;
+                case 3:
+                    showListTeacherOfDiscipline();
+                    break;
                 case 0:
                     repClass = false;
                     break;
@@ -30,14 +33,51 @@ public class App {
 
     }//constructor
 
+
+    public void showListTeacherOfDiscipline(){
+        Discipline discipline = new Discipline();
+
+
+
+    }
+
     public void assignDisciplineToTeacher(){
         write("Digite o Id do professor que deseja atribuir");
         listTeacher();
         int idTeacher = read.nextInt();
 
-        write("Agora a disciplina");
+        Teacher teacherSelected = teacherHash.get(idTeacher);
+
+        write("Digite o id da matéria");
         listDisciplines();
+        int idDiscipline = read.nextInt();
+        Discipline disciplineSelected = disciplinesHash.get(idDiscipline);
+
+        disciplineSelected.setTeachers(teacherSelected);//armazena o professor junto à disciplina
+
+
+
+        HashMap<Discipline, Teacher> hashDisciplineTeacher = new HashMap<>();
+
+        hashDisciplineTeacher.put(disciplineSelected,teacherSelected);
+
+        disciplineSelected.setTeacherHash(hashDisciplineTeacher);
+
+       for(int i = 0; i < disciplineSelected.getTeacherHash().size(); i++){
+
+       }
+
+
+
+
+
+
+
     }//createClass
+
+
+
+
 
 
 //----------------------------------------//

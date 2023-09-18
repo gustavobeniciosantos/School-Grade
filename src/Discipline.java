@@ -5,8 +5,9 @@ public class Discipline {
     private String disiplineName;
     private int disiplineID;
     private double[] notes = new double[2];
-    private ArrayList<Student> students = new ArrayList<>();
-    private ArrayList<Teacher> teachers = new ArrayList<>();
+    private Student students = new Student();
+    private Teacher teachers = new Teacher();
+    private HashMap<Discipline, Teacher> teacherHash = new HashMap<>();
 
     public String getDisiplineName() {
         return disiplineName;
@@ -32,19 +33,27 @@ public class Discipline {
         this.notes = notes;
     }
 
-    public ArrayList<Student> getStudents() {
+    public Student getStudents() {
         return students;
     }
 
-    public void setStudents(ArrayList<Student> students) {
+    public void setStudents(Student students) {
         this.students = students;
     }
 
-    public ArrayList<Teacher> getTeachers() {
+    public Teacher getTeachers() {
         return teachers;
     }
 
-    public void setTeachers(ArrayList<Teacher> teachers) {
+    public void setTeachers(Teacher teachers) {
         this.teachers = teachers;
+    }
+
+    public HashMap<Discipline, Teacher> getTeacherHash() {
+        return teacherHash;
+    }
+
+    public void setTeacherHash(HashMap<Discipline, Teacher> teacherHash) {
+        this.teacherHash = teacherHash;
     }
 }
