@@ -47,11 +47,21 @@ public class App {
         int idTeacher = read.nextInt();
 
         Teacher teacherSelected = teacherHash.get(idTeacher);
+        write("Professor " + teacherSelected.getName() + " selecionado");
+        write("");
+        write("Quantas matérias você deseja adicionar a este professor? Máx:" + disciplinesHash.size());
+        int qtdDisciplines = read.nextInt();
+        while (qtdDisciplines > disciplinesHash.size()){
+           write("Tamanho errado, digite novamente");
+           qtdDisciplines = read.nextInt();
+        }//whileVeriff
 
-        write("Digite o id da matéria");
-        listDisciplines();
-        int idDiscipline = read.nextInt();
-        Discipline disciplineSelected = disciplinesHash.get(idDiscipline);
+        for(int i = 0; i < qtdDisciplines; i++){
+            write("Digite o id da matéria");
+            listDisciplines();
+            int idDiscipline = read.nextInt();
+            Discipline disciplineSelected = disciplinesHash.get(idDiscipline);
+        }
 
         disciplineSelected.setTeachers(teacherSelected);//armazena o professor junto à disciplina
 
@@ -62,14 +72,6 @@ public class App {
         hashDisciplineTeacher.put(disciplineSelected,teacherSelected);
 
         disciplineSelected.setTeacherHash(hashDisciplineTeacher);
-
-       for(int i = 0; i < disciplineSelected.getTeacherHash().size(); i++){
-
-       }
-
-
-
-
 
 
 
