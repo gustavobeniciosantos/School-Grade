@@ -6,7 +6,6 @@ public class Front {
     public int menu(){
 
         write("Digite a opção desejada");
-
         write("");
 
         write("1. Adicionar ou remover um professor");
@@ -24,8 +23,7 @@ public class Front {
     public int teacherMenu(){
 
         write("Digite a opção desejada");
-
-
+        write("");
 
         write("1. Adicionar professor");
         write("2. Remover professor (Digite o id dele)");
