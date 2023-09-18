@@ -3,7 +3,9 @@ public class App {
     Scanner read = new Scanner(System.in);
     HashMap<Integer, Teacher> teacherHash = new HashMap<>();
     HashMap<Integer, Discipline> disciplinesHash = new HashMap<>();
+    HashMap<Discipline, Teacher> hashDisciplineTeacher;
     boolean repClass = true;
+    Discipline disciplineSelected;
 
     Front front = new Front();
 
@@ -55,24 +57,24 @@ public class App {
            write("Tamanho errado, digite novamente");
            qtdDisciplines = read.nextInt();
         }//whileVeriff
+        write("Digite o(s) id(s) da(s) matéria(s)");
+        listDisciplines();
 
         for(int i = 0; i < qtdDisciplines; i++){
-            write("Digite o id da matéria");
-            listDisciplines();
+
             int idDiscipline = read.nextInt();
-            Discipline disciplineSelected = disciplinesHash.get(idDiscipline);
+
+            disciplineSelected = disciplinesHash.get(idDiscipline);//pega a disciplina selecionada com o ID
+            disciplineSelected.setTeachers(teacherSelected);//Jogo o professor selecionado na classe da disciplina
+
+            hashDisciplineTeacher = new HashMap<>();//crio um HashMap para jogar os professores
+
+            hashDisciplineTeacher.put(disciplineSelected,teacherSelected);//adiciono os objetos que retornaram (Disciplina e professor)
+
+
+
         }
-
-        disciplineSelected.setTeachers(teacherSelected);//armazena o professor junto à disciplina
-
-
-
-        HashMap<Discipline, Teacher> hashDisciplineTeacher = new HashMap<>();
-
-        hashDisciplineTeacher.put(disciplineSelected,teacherSelected);
-
-        disciplineSelected.setTeacherHash(hashDisciplineTeacher);
-
+        disciplineSelected.setTeacherHash(hashDisciplineTeacher); //Jogo o HashMap para o atribuito hashmap da classe Discipline
 
 
     }//createClass
