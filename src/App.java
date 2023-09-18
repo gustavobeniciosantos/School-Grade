@@ -2,27 +2,76 @@ import java.util.*;
 public class App {
     Scanner read = new Scanner(System.in);
     Teacher teacher = new Teacher();
+    Front front = new Front();
     HashMap<Integer, String> professor = new HashMap<>();
+    boolean repClass = true;
+    boolean repTeacher = true;
     public App(){
 
     generateDisciplines();
-    write("Ótimo, agora cadastre os professores: ");
+        write("Dicipinas cadastradas ");
+        write("");
 
     generateTeacher();
+
+    write("");
+    generateClass();
 
 
 
 }//constr
 
-    public void generateTeacher(){
-         boolean rep = true;
 
-        Front front = new Front();
+
+
+    public void addDisciplineToTeacher(){
+        write("Selecione um professor para atribuir uma ou mais matérias");
+        write("");
+        listTeachers();
+
+
+        int selectedTeacher = read.nextInt();
+    }
+
+
+
+    public void generateClass(){
+
+        while (repClass){
+            write("");
+            int option = front.menu();
+            write("");
+            switch (option){
+                case 1://add ou rem prof
+                    repTeacher = true;
+                    generateTeacher();
+                    break;
+                case 2://add disciplina a um prof
+                    addDisciplineToTeacher();
+                    break;
+                case 3://add turma
+                    break;
+                case 4://rem turma
+                    break;
+                case 5://acessar turma
+                    break;
+                case 0:
+                    repClass = false;
+                    break;
+            }
+
+        }
+    }//genClass
+
+
+// Gero um ou mais professores
+    public void generateTeacher(){
+
 
         int i = 1;
 
-        while(rep){
 
+        while(repTeacher){
             int option = front.teacherMenu();
 
            switch (option){
@@ -42,8 +91,7 @@ public class App {
                    listTeachers();
                    break;
                case 0:
-                   rep = false;
-                   break;
+                   return;
            }//sc
 
         }//while
@@ -51,6 +99,8 @@ public class App {
 
 }//genTeacher
 
+
+    //Listo os professores
     public void listTeachers(){
 
         for(Map.Entry<Integer, String> entry : professor.entrySet()){
@@ -62,7 +112,7 @@ public class App {
 
       }
 
-
+    //Gero as disciplinas
     public void generateDisciplines(){
         Discipline discipline = new Discipline();
         write("Seja bem vindo à Escola da Brendinha!");

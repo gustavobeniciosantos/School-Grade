@@ -3,7 +3,7 @@ import java.util.HashMap;
 public class Teacher{
 
     private HashMap<Integer, String> teacher;
-    private Discipline disciplines;
+    private HashMap<Integer, String> disciplines;
     private String salary;
 
     public HashMap<Integer, String> getTeacher() {
@@ -15,11 +15,11 @@ public class Teacher{
     }
 
 
-    public Discipline getDisciplines() {
+    public HashMap<Integer, String> getDisciplines() {
         return disciplines;
     }
 
-    public void setDisciplines(Discipline disciplines) {
+    public void setDisciplines(HashMap<Integer, String> disciplines) {
         this.disciplines = disciplines;
     }
 
