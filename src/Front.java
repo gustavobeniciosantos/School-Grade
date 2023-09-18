@@ -4,7 +4,7 @@ public class Front {
     Scanner read = new Scanner(System.in);
 
     public int menu(){
-
+        write("");
         write("Digite a opção desejada");
         write("");
 

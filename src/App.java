@@ -3,6 +3,7 @@ public class App {
     Scanner read = new Scanner(System.in);
     HashMap<Integer, Teacher> teacherHash = new HashMap<>();
     HashMap<Integer, Discipline> disciplinesHash = new HashMap<>();
+    boolean repClass = true;
 
     Front front = new Front();
 
@@ -11,7 +12,33 @@ public class App {
         generateDiscipline();
         generateTeacher();
 
-    }
+        while(repClass){
+            int option = front.menu();
+
+            switch (option){
+                case 1:
+                    generateTeacher();
+                    break;
+                case 2:
+                    assignDisciplineToTeacher();
+                    break;
+                case 0:
+                    repClass = false;
+                    break;
+            }//sc
+        }//while
+
+    }//constructor
+
+    public void assignDisciplineToTeacher(){
+        write("Digite o Id do professor que deseja atribuir");
+        listTeacher();
+        int idTeacher = read.nextInt();
+
+        write("Agora a disciplina");
+        listDisciplines();
+    }//createClass
+
 
 //----------------------------------------//
 
@@ -39,8 +66,10 @@ public class App {
                 case 0:
                     repTeacher = false;
                     break;
-            }
-        }
+                default:
+                    write("Opção errada");
+            }//sc
+        }//whileTeacher
 
     }//genTeacher
 //----------------------------------------//
@@ -57,7 +86,7 @@ public class App {
             System.out.println("Nome: " + name + "    ID: " + id);
         }
 
-    }
+    }//listTeacher
 
 //----------------------------------------//
 
