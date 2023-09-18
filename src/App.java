@@ -1,24 +1,98 @@
 import java.util.*;
 public class App {
     Scanner read = new Scanner(System.in);
+    HashMap<Integer, Teacher> teacherHash = new HashMap<>();
+    HashMap<Integer, Discipline> disciplinesHash = new HashMap<>();
 
     Front front = new Front();
 
     public App(){
         write("Seja bem-vindo(a) a nossa escola!");
         generateDiscipline();
+        generateTeacher();
 
     }
 
+//----------------------------------------//
 
+    //Gerar ou Remover um professor
+    public void generateTeacher(){
 
+        boolean repTeacher = true;
+
+        while (repTeacher){
+            int option = front.teacherMenu();
+            switch (option){
+                case 1:
+                    Teacher newTeacher = createTeacher();
+                    teacherHash.put(newTeacher.getId(), newTeacher);
+                    break;
+                case 2:
+                    listTeacher();
+                    write("Digite o id do professor que deseja remover");
+                    int id = read.nextInt();
+                    teacherHash.remove(id);
+                    break;
+                case 3:
+                    listTeacher();
+                    break;
+                case 0:
+                    repTeacher = false;
+                    break;
+            }
+        }
+
+    }//genTeacher
+//----------------------------------------//
+
+    //Lista os Professores
+    public void listTeacher(){
+        System.out.println("Lista de Professores:");
+
+        for (Map.Entry<Integer, Teacher> entry : teacherHash.entrySet()) {
+            int id = entry.getKey();
+            Teacher teacher = entry.getValue();
+            String name = teacher.getName();
+
+            System.out.println("Nome: " + name + "    ID: " + id);
+        }
+
+    }
+
+//----------------------------------------//
+
+    //Imputo os dados do professor e retorno um objeto professor
+
+    public Teacher createTeacher(){
+
+        Teacher newTeacher = new Teacher();
+
+        write("Digite o nome do professor");
+        newTeacher.setName(read.next());
+
+        newTeacher.setId((int) (Math.random() * 9000) + 1000); //Gera o ID
+
+        return newTeacher;
+    }//criarProfessor
+
+    //----------------------------------------//
+
+    //Listar Disciplinas
+    public void listDisciplines(){
+
+        for(Map.Entry<Integer, Discipline> entry : disciplinesHash.entrySet()){
+            int id = entry.getKey();
+            String name = entry.getValue().getDisiplineName();
+
+            System.out.println("Disciplina: " + name + "   ID: " + id);
+        }//forPrint
+    }
 
 
     //-------------------------------------//
+
     //Adiciono o Objeto num Hashmap
     public void generateDiscipline(){
-        HashMap<Integer, Discipline> disciplinesHash = new HashMap<>();
-
         write("Quantas disciplinas você quer na sua escola?");
         int qtdDisciplines = read.nextInt();
 
@@ -29,12 +103,6 @@ public class App {
             disciplinesHash.put(newDiscipline.getDisiplineID(), newDiscipline);
         }//forLoad
 
-        for(Map.Entry<Integer, Discipline> entry : disciplinesHash.entrySet()){
-            int id = entry.getKey();
-            String name = entry.getValue().getDisiplineName();
-
-            System.out.println("Nome: " + name + "   ID: " + id);
-        }//forPrint
     }//generate Discipline
 
     //----------------------------------------//
@@ -49,7 +117,7 @@ public class App {
         newDiscipline.setDisiplineID((int) (Math.random() * 90000) + 10000);//ID da disciplina
 
         return newDiscipline;
-    }//genDisc
+    }//Criar Disciplina
 
 
     public void write(String text){
