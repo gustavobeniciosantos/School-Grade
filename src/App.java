@@ -38,8 +38,21 @@ public class App {
 
 
     public void showListTeacherOfDiscipline(){
-        Discipline discipline = new Discipline();
+        write("Digite o código do professor que deseja ver as matérias atribuidas");
+        listTeacher();
+        int idTeacher = read.nextInt();
 
+        Teacher teacherSelected = teacherHash.get(idTeacher);
+        write("-----------Professor " + teacherSelected.getName()+"-----------");
+        write("");
+        if(teacherSelected.getDisciplines().size() == 0){
+            write("Não há nenhuma matéria atribuida");
+            write("----------------------------------");
+        }else{
+            for(int i = 0; i < teacherSelected.getDisciplines().size(); i++){
+                System.out.println(teacherSelected.getDisciplines().get(i).getDisiplineName());
+            }//for
+        }//else
 
 
     }
@@ -77,9 +90,7 @@ public class App {
     }//createClass
 
 
-//     for(int i = 0; i < teacherSelected.getDisciplines().size(); i++){
-//        System.out.println(teacherSelected.getDisciplines().get(i).getDisiplineName());
-//    }
+
 
 
 

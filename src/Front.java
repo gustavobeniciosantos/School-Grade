@@ -10,9 +10,10 @@ public class Front {
 
         write("1. Adicionar ou remover um professor");
         write("2. Inserir uma ou mais disciplinas a um professor");
-        write("3. Criar uma turma");
-        write("4.Remover turma");
-        write("5.Acessar turma");
+        write("3. Ver lista de disciplinas do professor");
+        write("4. Criar uma turma");
+        write("5.Remover turma");
+        write("6.Acessar turma");
         write("0. Sair");
 
 
