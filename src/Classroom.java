@@ -1,29 +1,41 @@
+import java.util.HashMap;
+
 public class Classroom {
     private String Classroom;
-    private Student student;
+    private HashMap<Integer, Student> student;
     private Teacher teacher;
 
-    public String getClassroom() {
-        return Classroom;
+
+    
+
+    public HashMap<Integer,Student> getStudent() {
+        return this.student;
     }
 
-    public void setClassroom(String classroom) {
-        Classroom = classroom;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
+    public void setStudent(HashMap<Integer, Student> student) {
         this.student = student;
     }
 
+    
+
+    public String getClassroom() {
+        return this.Classroom;
+    }
+
+    public void setClassroom(String Classroom) {
+        this.Classroom = Classroom;
+    }
+
+    
+
     public Teacher getTeacher() {
-        return teacher;
+        return this.teacher;
     }
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
+
+
+
 }
