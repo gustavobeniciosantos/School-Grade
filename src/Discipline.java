@@ -7,7 +7,7 @@ public class Discipline {
     private double[] notes = new double[2];
     private Student students = new Student();
     private Teacher teachers = new Teacher();
-    private HashMap<Discipline, Teacher> teacherHash = new HashMap<>();
+
 
     public String getDisiplineName() {
         return disiplineName;
@@ -49,11 +49,4 @@ public class Discipline {
         this.teachers = teachers;
     }
 
-    public HashMap<Discipline, Teacher> getTeacherHash() {
-        return teacherHash;
-    }
-
-    public void setTeacherHash(HashMap<Discipline, Teacher> teacherHash) {
-        this.teacherHash = teacherHash;
-    }
 }

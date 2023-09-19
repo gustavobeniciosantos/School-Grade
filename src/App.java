@@ -3,6 +3,7 @@ public class App {
     Scanner read = new Scanner(System.in);
     HashMap<Integer, Teacher> teacherHash = new HashMap<>();
     HashMap<Integer, Discipline> disciplinesHash = new HashMap<>();
+    ArrayList<Discipline> disciplines = new ArrayList<>();
     HashMap<Discipline, Teacher> hashDisciplineTeacher;
     boolean repClass = true;
     Discipline disciplineSelected;
@@ -49,10 +50,12 @@ public class App {
         int idTeacher = read.nextInt();
 
         Teacher teacherSelected = teacherHash.get(idTeacher);
+
         write("Professor " + teacherSelected.getName() + " selecionado");
         write("");
         write("Quantas matérias você deseja adicionar a este professor? Máx:" + disciplinesHash.size());
         int qtdDisciplines = read.nextInt();
+
         while (qtdDisciplines > disciplinesHash.size()){
            write("Tamanho errado, digite novamente");
            qtdDisciplines = read.nextInt();
@@ -64,20 +67,19 @@ public class App {
 
             int idDiscipline = read.nextInt();
 
-            disciplineSelected = disciplinesHash.get(idDiscipline);//pega a disciplina selecionada com o ID
-            disciplineSelected.setTeachers(teacherSelected);//Jogo o professor selecionado na classe da disciplina
+            disciplineSelected = disciplinesHash.get(idDiscipline);//pega a disciplina selecionada com o ID (Return OBJ Discipline)
 
-            hashDisciplineTeacher = new HashMap<>();//crio um HashMap para jogar os professores
-
-            hashDisciplineTeacher.put(disciplineSelected,teacherSelected);//adiciono os objetos que retornaram (Disciplina e professor)
-
-
-
-        }
-        disciplineSelected.setTeacherHash(hashDisciplineTeacher); //Jogo o HashMap para o atribuito hashmap da classe Discipline
+            disciplines.add(disciplineSelected);//Coloco o objeto disciplina dentro do arraylist
+            teacherSelected.setDisciplines(disciplines);
+        }//forAddDiscipline
 
 
     }//createClass
+
+
+//     for(int i = 0; i < teacherSelected.getDisciplines().size(); i++){
+//        System.out.println(teacherSelected.getDisciplines().get(i).getDisiplineName());
+//    }
 
 
 
