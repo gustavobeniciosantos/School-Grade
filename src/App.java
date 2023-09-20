@@ -4,7 +4,9 @@ public class App {
     HashMap<Integer, Teacher> teacherHash = new HashMap<>();
     HashMap<Integer, Discipline> disciplinesHash = new HashMap<>();
     ArrayList<Discipline> disciplines = new ArrayList<>();
+    Classroom newClass = new Classroom();
     HashMap<Discipline, Teacher> hashDisciplineTeacher;
+    boolean repGlobal = true;
     boolean repClass = true;
     Discipline disciplineSelected;
 
@@ -15,7 +17,7 @@ public class App {
         generateDiscipline();
         generateTeacher();
 
-        while(repClass){
+        while(repGlobal){
             int option = front.menu();
 
             switch (option){
@@ -28,13 +30,76 @@ public class App {
                 case 3:
                     showListTeacherOfDiscipline();
                     break;
+                case 4:
+                createClassroom();
+                    break;
                 case 0:
-                    repClass = false;
+                    repGlobal = false;
                     break;
             }//sc
         }//while
 
     }//constructor
+
+        public ArrayList<Student> assignStudentToClassroom(){
+            ArrayList<Student> student = new ArrayList<>();
+            
+
+            Student newStudent = createStudent();
+                newStudent.setClassroom(newClass);
+
+
+            return student;
+        }
+
+        public Student createStudent(){
+            
+            Student newStudent = new Student();
+
+            write("Digite o nome do aluno");
+            newStudent.setName(read.next());
+
+            newStudent.setStudentId((int) (Math.random() * 900) + 100);
+
+            return newStudent;
+        }
+
+
+        public Classroom createClassroom(){
+           
+           write("Digite o nome da sala");
+           newClass.setClassroom(read.next());
+           
+           while(repClass){
+            int option = front.menuStudents();
+            switch(option){
+                case 1:
+                ArrayList<Student> student = assignStudentToClassroom();
+                student.add(createStudent());
+                  break;
+                
+                  case 2:
+                  student = assignStudentToClassroom();
+                  for(int i =0; i < student.size();i++){
+                    System.out.println(student.get(i).getName());
+                  }
+                    break;
+                case 0:
+                    repClass = false;
+                    break;    
+                default:
+                write("Opção incorreta");    
+                write("");
+            }
+           }
+           
+
+            return newClass;
+        }
+
+
+//-------------------------------------//
+//Selecione o professor e veja as matérias que ele dá aula
 
 
     public void showListTeacherOfDiscipline(){
@@ -56,6 +121,9 @@ public class App {
 
 
     }
+
+    //---------------------------------------------//
+    //Designar a disciplina ao professor
 
     public void assignDisciplineToTeacher(){
         write("Digite o Id do professor que deseja atribuir");
@@ -88,13 +156,6 @@ public class App {
 
 
     }//createClass
-
-
-
-
-
-
-
 
 
 //----------------------------------------//
