@@ -9,7 +9,9 @@ public class App {
     HashMap<Discipline, Teacher> hashDisciplineTeacher;
     boolean repGlobal = true;
     boolean repClass = true;
+    boolean repStudent = true;
     Discipline disciplineSelected;
+    Classroom classSelected;
 
     Front front = new Front();
 
@@ -25,20 +27,24 @@ public class App {
 
 
         public void listStudent(){
+            if(classSelected.getStudent() == null){
+                write("Não há alunos nesta turma, selecione a turma novamente");
+                write("");
+                menageStudent();
+            }else{
+                for(Map.Entry<Integer, Student> entry : classSelected.getStudent().entrySet()){
+                    int id = entry.getKey();
+                    String name = entry.getValue().getName();
 
-           for(Map.Entry<Integer, Student> entry : studentHash.entrySet()){
-               int studentID = entry.getKey();
-               Student student = entry.getValue();
-               String studentName = student.getName();
-
-               write("Nome: " + studentName + "       ID:" + studentID);
-
-           }
+                    write("Nome: "+name +"   ID: "+ id);
+                }
+            }
 
         }
 
         public void removeStudent(){
-        if(studentHash.isEmpty()){
+
+        if(classSelected.getStudent().isEmpty()){
             write("Não há estudante para remover da lista");
         }else{
             write("Digite o ID do estudante que deseja remover da sala");
@@ -49,6 +55,7 @@ public class App {
 
             if (studentHash.containsKey(idRemove)) {
                 studentHash.remove(idRemove);
+                classSelected.setStudent(studentHash);
             }else {
                 write("Id inexistente");
             }
@@ -60,8 +67,6 @@ public class App {
 
             Student newStudent = createStudent();
             studentHash.put(newStudent.getStudentId(), newStudent);
-
-            Classroom classSelected = new Classroom();
 
             classSelected.setStudent(studentHash);
 
@@ -80,14 +85,13 @@ public class App {
 
         public void menageStudent(){
 
-            boolean repStudent = true;
+            repStudent = true;
 
             write("Selecione uma sala");
             listClass();
 
-            int classPosition = getClassByName();
+           classSelected = selectClass();
 
-            write("Sala " + classArray.get(classPosition).getClassroom() + " selecionada");
 
             while (repStudent){
                 int option = front.menuStudents();
@@ -134,6 +138,16 @@ public class App {
             write("--------------------------------");
         }
 
+
+        public Classroom selectClass(){
+
+            Classroom selectedClass = classArray.get(getClassByName());
+            write("Classe " + selectedClass.getClassroom() + " selecionada");
+
+
+            return selectedClass;
+        }
+
         //------------------------------------------------//
         //Verifica a posição do nome da sala que está na arraylist
         public int getClassByName(){
@@ -152,8 +166,6 @@ public class App {
                          return i; // Retorna a posição se encontrada
                      }//if
                  }//for
-
-
 
 
             write("Não encontrado");
