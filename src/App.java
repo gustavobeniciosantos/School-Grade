@@ -3,9 +3,9 @@ public class App {
     Scanner read = new Scanner(System.in);
     HashMap<Integer, Teacher> teacherHash = new HashMap<>();
     HashMap<Integer, Discipline> disciplinesHash = new HashMap<>();
+    HashMap<Integer, Student> studentHash = new HashMap<>();
     ArrayList<Discipline> disciplines = new ArrayList<>();
     ArrayList<Classroom> classArray = new ArrayList<>();
-    ArrayList<Student> studentsArray = new ArrayList<>();
     HashMap<Discipline, Teacher> hashDisciplineTeacher;
     boolean repGlobal = true;
     boolean repClass = true;
@@ -18,40 +18,30 @@ public class App {
         generateDiscipline();
         generateTeacher();
 
-        while(repGlobal){
-            int option = front.menu();
-
-            switch (option){
-                case 1:
-                    generateTeacher();
-                    break;
-                case 2:
-                    assignDisciplineToTeacher();
-                    break;
-                case 3:
-                    showListTeacherOfDiscipline();
-                    break;
-                case 4:
-                addClassroom();
-                    break;
-                case 5:
-                    write("----------Remover turma-------------");
-                    listClass();
-                    removeClass();
-                    break;
-                case 6:
-
-                    break;
-
-                case 0:
-                    repGlobal = false;
-                    break;
-            }//sc
-        }//while
+        start();
 
     }//constructor
 
+        public void listStudent(){
+
+           for(Map.Entry<Integer, Student> entry : studentHash.entrySet()){
+               int studentID = entry.getKey();
+               Student student = entry.getValue();
+               String studentName = student.getName();
+
+               write("Nome: " + studentName + "       ID:" + studentID);
+
+           }
+
+        }
         public void generateStudent(){
+
+            Student newStudent = new Student();
+            studentHash.put(newStudent.getStudentId(), newStudent);
+
+            Classroom classSelected = new Classroom();
+
+            classSelected.setStudent(studentHash);
 
         }
         public Student createStudent(){
@@ -123,17 +113,28 @@ public class App {
         //------------------------------------------------//
         //Verifica a posição do nome da sala que está na arraylist
         public int getClassByName(){
-            Classroom newClass = new Classroom();
 
-            write("Digite o nome da sala");
-            String className = read.next();
-            int posClass = classArray.indexOf(newClass.getClassroom().indexOf(className));
+                 while (classArray.isEmpty()){
+                     write("Não há salas cadastradas!");
+                     start();
 
-                if(posClass > -1){
-                    return posClass;
-                } else {
-                    return getClassByName();
-                }
+                 }//while
+
+                 write("Digite o nome da sala");
+                 String className = read.next();
+                 for (int i = 0; i < classArray.size(); i++) {
+                     Classroom currentClass = classArray.get(i);
+                     if (currentClass.getClassroom().equals(className)) {
+                         return i; // Retorna a posição se encontrada
+                     }//if
+                 }//for
+
+
+
+
+            write("Não encontrado");
+            return getClassByName();
+
         }
         //-----------------------
 
@@ -319,6 +320,42 @@ public class App {
 
         return newDiscipline;
     }//Criar Disciplina
+
+
+    public void start(){
+        while(repGlobal){
+            int option = front.menu();
+
+            switch (option){
+                case 1:
+                    generateTeacher();
+                    break;
+                case 2:
+                    assignDisciplineToTeacher();
+                    break;
+                case 3:
+                    showListTeacherOfDiscipline();
+                    break;
+                case 4:
+                    addClassroom();
+                    break;
+                case 5:
+                    write("----------Remover turma-------------");
+                    listClass();
+                    removeClass();
+                    break;
+                case 6:
+                    menageStudent();
+                    generateStudent();
+                    listStudent();
+                    break;
+
+                case 0:
+                    repGlobal = false;
+                    break;
+            }//sc
+        }//while
+    }
 
 
     public void write(String text){
