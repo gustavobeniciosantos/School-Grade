@@ -4,7 +4,9 @@ public class App {
     HashMap<Integer, Teacher> teacherHash = new HashMap<>();
     HashMap<Integer, Discipline> disciplinesHash = new HashMap<>();
     ArrayList<Discipline> disciplines = new ArrayList<>();
+    ArrayList<String> classHash = new ArrayList<>();
     HashMap<Discipline, Teacher> hashDisciplineTeacher;
+    Classroom newClass = new Classroom();
     boolean repGlobal = true;
     boolean repClass = true;
     Discipline disciplineSelected;
@@ -32,6 +34,11 @@ public class App {
                 case 4:
                 createClassroom();
                     break;
+                case 5:
+                   listClass();
+
+                    break;
+
                 case 0:
                     repGlobal = false;
                     break;
@@ -53,15 +60,49 @@ public class App {
             return newStudent;
         }
 
-    
+        public void removeClass(){
+            Classroom classSelected = getClassByName();
+            classHash.remove(classSelected);
 
-        public Classroom createClassroom(){
+        }
 
-            Classroom newClass = new Classroom();
-           write("Digite o nome da sala");
-           newClass.setClassroom(read.next());    
-                       
-            return newClass;
+        public void listClass(){
+            write("--------------------------------");
+            for(int i = 0; i < classHash.size(); i++){
+
+                write("Sala: " + classHash.get(i));
+            }
+            write("--------------------------------");
+        }
+
+
+
+
+        //---------------------------------
+        public Classroom getClassByName(){
+
+            write("Digite o nome da sala");
+            String className = read.next();
+            for(int i = 0; i < classHash.size(); i++){
+                if(newClass.getClassroom().equals(className)){
+                    return newClass;
+                }//if
+                else
+                    write("Não localizado, tente novamente: ");
+
+            }//for
+            return getClassByName();
+        }
+        //-----------------------
+
+
+        public void createClassroom(){
+
+            write("Digite o nome da sala");
+            newClass.setClassroom(read.next());
+
+           String className =  newClass.getClassroom();
+           classHash.add(className);
         }
 
 
