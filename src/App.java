@@ -35,8 +35,9 @@ public class App {
                 createClassroom();
                     break;
                 case 5:
+                    write("----------Remover turma-------------");
                    listClass();
-
+                   removeClass();
                     break;
 
                 case 0:
