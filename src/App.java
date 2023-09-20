@@ -60,13 +60,21 @@ public class App {
 
             return newStudent;
         }
-
+        //---------------------------------------//
+        //Remove a sala do arraylist
         public void removeClass(){
-            Classroom classSelected = getClassByName();
-            classHash.remove(classSelected);
+            if(classHash.isEmpty()){
+                write("Não há nenhuma classe listada");
+                write("--------------------------------");
+            }else{
+                int position = getClassByName();
+                classHash.remove(position);
+            }
+
 
         }
-
+        //---------------------------------------------//
+        //Lista a classe
         public void listClass(){
             write("--------------------------------");
             for(int i = 0; i < classHash.size(); i++){
@@ -76,23 +84,19 @@ public class App {
             write("--------------------------------");
         }
 
-
-
-
-        //---------------------------------
-        public Classroom getClassByName(){
+        //------------------------------------------------//
+        //Verifica a posição do nome da sala que está na arraylist
+        public int getClassByName(){
 
             write("Digite o nome da sala");
             String className = read.next();
-            for(int i = 0; i < classHash.size(); i++){
-                if(newClass.getClassroom().equals(className)){
-                    return newClass;
-                }//if
-                else
-                    write("Não localizado, tente novamente: ");
+            int posClass = classHash.indexOf(className);
 
-            }//for
-            return getClassByName();
+                if(posClass > -1){
+                    return posClass;
+                } else {
+                    return getClassByName();
+                }
         }
         //-----------------------
 
