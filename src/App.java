@@ -4,9 +4,9 @@ public class App {
     HashMap<Integer, Teacher> teacherHash = new HashMap<>();
     HashMap<Integer, Discipline> disciplinesHash = new HashMap<>();
     ArrayList<Discipline> disciplines = new ArrayList<>();
-    ArrayList<String> classHash = new ArrayList<>();
+    ArrayList<Classroom> classArray = new ArrayList<>();
+    ArrayList<Student> studentsArray = new ArrayList<>();
     HashMap<Discipline, Teacher> hashDisciplineTeacher;
-    Classroom newClass = new Classroom();
     boolean repGlobal = true;
     boolean repClass = true;
     Discipline disciplineSelected;
@@ -32,12 +32,15 @@ public class App {
                     showListTeacherOfDiscipline();
                     break;
                 case 4:
-                createClassroom();
+                addClassroom();
                     break;
                 case 5:
                     write("----------Remover turma-------------");
-                   listClass();
-                   removeClass();
+                    listClass();
+                    removeClass();
+                    break;
+                case 6:
+
                     break;
 
                 case 0:
@@ -48,11 +51,12 @@ public class App {
 
     }//constructor
 
-        
+        public void generateStudent(){
+
+        }
         public Student createStudent(){
             
             Student newStudent = new Student();
-
             write("Digite o nome do aluno");
             newStudent.setName(read.next());
 
@@ -60,15 +64,47 @@ public class App {
 
             return newStudent;
         }
+
+
+        public void menageStudent(){
+
+            boolean repStudent = true;
+
+            write("Selecione uma sala");
+            listClass();
+
+            int classPosition = getClassByName();
+
+            write("Sala " + classArray.get(classPosition).getClassroom() + " selecionada");
+
+            while (repStudent){
+                int option = front.menuStudents();
+                switch (option){
+                    case 1:
+
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 0:
+                        repStudent = false;
+                        break;
+                }
+            }
+
+
+        }
+
         //---------------------------------------//
         //Remove a sala do arraylist
         public void removeClass(){
-            if(classHash.isEmpty()){
+            if(classArray.isEmpty()){
                 write("Não há nenhuma classe listada");
                 write("--------------------------------");
             }else{
                 int position = getClassByName();
-                classHash.remove(position);
+                classArray.remove(position);
             }
 
 
@@ -77,9 +113,9 @@ public class App {
         //Lista a classe
         public void listClass(){
             write("--------------------------------");
-            for(int i = 0; i < classHash.size(); i++){
-
-                write("Sala: " + classHash.get(i));
+            for(int i = 0; i < classArray.size(); i++){
+                Classroom currentClass = classArray.get(i);
+                write("Sala: " + currentClass.getClassroom());
             }
             write("--------------------------------");
         }
@@ -87,10 +123,11 @@ public class App {
         //------------------------------------------------//
         //Verifica a posição do nome da sala que está na arraylist
         public int getClassByName(){
+            Classroom newClass = new Classroom();
 
             write("Digite o nome da sala");
             String className = read.next();
-            int posClass = classHash.indexOf(className);
+            int posClass = classArray.indexOf(newClass.getClassroom().indexOf(className));
 
                 if(posClass > -1){
                     return posClass;
@@ -100,14 +137,18 @@ public class App {
         }
         //-----------------------
 
+        public void addClassroom(){
+            Classroom newClass = createClassroom();
 
-        public void createClassroom(){
+            classArray.add(newClass);
+        }
+        public Classroom createClassroom(){
+            Classroom newClass = new Classroom();
 
             write("Digite o nome da sala");
             newClass.setClassroom(read.next());
 
-           String className =  newClass.getClassroom();
-           classHash.add(className);
+            return newClass;
         }
 
 
