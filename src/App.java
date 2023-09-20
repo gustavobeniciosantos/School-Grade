@@ -22,6 +22,8 @@ public class App {
 
     }//constructor
 
+
+
         public void listStudent(){
 
            for(Map.Entry<Integer, Student> entry : studentHash.entrySet()){
@@ -34,9 +36,29 @@ public class App {
            }
 
         }
+
+        public void removeStudent(){
+        if(studentHash.isEmpty()){
+            write("Não há estudante para remover da lista");
+        }else{
+            write("Digite o ID do estudante que deseja remover da sala");
+            listStudent();
+            write("");
+
+            int idRemove = read.nextInt();
+
+            if (studentHash.containsKey(idRemove)) {
+                studentHash.remove(idRemove);
+            }else {
+                write("Id inexistente");
+            }
+
+
+        }
+        }
         public void generateStudent(){
 
-            Student newStudent = new Student();
+            Student newStudent = createStudent();
             studentHash.put(newStudent.getStudentId(), newStudent);
 
             Classroom classSelected = new Classroom();
@@ -71,11 +93,13 @@ public class App {
                 int option = front.menuStudents();
                 switch (option){
                     case 1:
-
+                        generateStudent();
                         break;
                     case 2:
+                        removeStudent();
                         break;
                     case 3:
+                        listStudent();
                         break;
                     case 0:
                         repStudent = false;
@@ -226,12 +250,16 @@ public class App {
                 case 1:
                     Teacher newTeacher = createTeacher();
                     teacherHash.put(newTeacher.getId(), newTeacher);
+                    write("----Professor criado!----");
+                    write("");
                     break;
                 case 2:
                     listTeacher();
                     write("Digite o id do professor que deseja remover");
                     int id = read.nextInt();
                     teacherHash.remove(id);
+                    write("----Professor removido!----");
+                    write("");
                     break;
                 case 3:
                     listTeacher();
@@ -249,7 +277,9 @@ public class App {
 
     //Lista os Professores
     public void listTeacher(){
-        System.out.println("Lista de Professores:");
+        write("----------------------");
+        write("Lista de Professores:");
+        write("----------------------");
 
         for (Map.Entry<Integer, Teacher> entry : teacherHash.entrySet()) {
             int id = entry.getKey();
@@ -269,6 +299,7 @@ public class App {
 
         Teacher newTeacher = new Teacher();
 
+        write("");
         write("Digite o nome do professor");
         newTeacher.setName(read.next());
 
@@ -295,6 +326,7 @@ public class App {
 
     //Adiciono o Objeto num Hashmap
     public void generateDiscipline(){
+        write("");
         write("Quantas disciplinas você quer na sua escola?");
         int qtdDisciplines = read.nextInt();
 
@@ -346,8 +378,6 @@ public class App {
                     break;
                 case 6:
                     menageStudent();
-                    generateStudent();
-                    listStudent();
                     break;
 
                 case 0:

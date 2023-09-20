@@ -18,6 +18,7 @@ public class Front {
 
     public int menu(){
         write("");
+        write("");
         write("Digite a opção desejada");
         write("");
 
