@@ -4,7 +4,6 @@ public class App {
     HashMap<Integer, Teacher> teacherHash = new HashMap<>();
     HashMap<Integer, Discipline> disciplinesHash = new HashMap<>();
     ArrayList<Discipline> disciplines = new ArrayList<>();
-    Classroom newClass = new Classroom();
     HashMap<Discipline, Teacher> hashDisciplineTeacher;
     boolean repGlobal = true;
     boolean repClass = true;
@@ -41,17 +40,7 @@ public class App {
 
     }//constructor
 
-        public ArrayList<Student> assignStudentToClassroom(){
-            ArrayList<Student> student = new ArrayList<>();
-            
-
-            Student newStudent = createStudent();
-                newStudent.setClassroom(newClass);
-
-
-            return student;
-        }
-
+        
         public Student createStudent(){
             
             Student newStudent = new Student();
@@ -64,36 +53,14 @@ public class App {
             return newStudent;
         }
 
+    
 
         public Classroom createClassroom(){
-           
-           write("Digite o nome da sala");
-           newClass.setClassroom(read.next());
-           
-           while(repClass){
-            int option = front.menuStudents();
-            switch(option){
-                case 1:
-                ArrayList<Student> student = assignStudentToClassroom();
-                student.add(createStudent());
-                  break;
-                
-                  case 2:
-                  student = assignStudentToClassroom();
-                  for(int i =0; i < student.size();i++){
-                    System.out.println(student.get(i).getName());
-                  }
-                    break;
-                case 0:
-                    repClass = false;
-                    break;    
-                default:
-                write("Opção incorreta");    
-                write("");
-            }
-           }
-           
 
+            Classroom newClass = new Classroom();
+           write("Digite o nome da sala");
+           newClass.setClassroom(read.next());    
+                       
             return newClass;
         }
 
